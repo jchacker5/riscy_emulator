@@ -15,7 +15,7 @@ This project is a software emulator for the RISCY instruction set, designed as p
 
 1. **Clone the repository:**
    ```
-   git clone https://yourrepositoryurl.com
+   git clone https://github.com/jchacker5/riscy_emulator.git
    ```
    
 2. **Compile the emulator:**
