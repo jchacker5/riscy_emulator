@@ -204,6 +204,5 @@ int main(int argc, char* argv[])
 
 void debug(char* iname, unsigned char opcode)
 {
-                printf("PC=%x, inst=%x, op=%s, A=%x, B=%x, C=%x, D=%x\n", PC, opcode, iname, registers[0], registers[1], registers[2], registers[3]);
+    printf("PC=%x, inst=%x, op=%s, A=%x, B=%x, C=%x, D=%x\n", PC, opcode, iname, registers[0], registers[1], registers[2], registers[3]);
 }
-

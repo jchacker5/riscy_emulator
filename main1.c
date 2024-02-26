@@ -54,9 +54,9 @@ int main(int argc, char* argv[]) {
     }
 
     // Load the test program into memory
-    unsigned char fib[29] = {0x15, 0xc8, 0xc9, 0x10, 0xc0, 0xd2, 0x0, 0x1f, 0x7d, 0x7e, 0x15, 0x76, 0x1a, 0x1a, 0x7b, 0x$
-    unsigned char printmem[85] = {0xff, 0xff, 0x1a, 0x3b, 0xff, 0xff, 0x23, 0x20, 0xf7, 0xc4, 0x61, 0x60, 0xc5, 0xc4, 0x$
-    unsigned char conway[256] = {0xf0, 0xc1, 0xef, 0xde, 0x5b, 0x83, 0xcf, 0xcc, 0x13, 0xef, 0xff, 0x33, 0xf2, 0xc0, 0xc$
+    unsigned char fib[29] = {0x15, 0xc8, 0xc9, 0x10, 0xc0, 0xd2, 0x0, 0x1f, 0x7d, 0x7e, 0x15, 0x76, 0x1a, 0x1a, 0x7b, 0x$}
+    unsigned char printmem[85] = {0xff, 0xff, 0x1a, 0x3b, 0xff, 0xff, 0x23, 0x20, 0xf7, 0xc4, 0x61, 0x60, 0xc5, 0xc4, 0x$}
+    unsigned char conway[256] = {0xf0, 0xc1, 0xef, 0xde, 0x5b, 0x83, 0xcf, 0xcc, 0x13, 0xef, 0xff, 0x33, 0xf2, 0xc0, 0xc$}
     
     // set test_program to fib, printmem, or conway
     unsigned char* test_program = fib;
@@ -103,15 +103,23 @@ int main(int argc, char* argv[]) {
         case NAND:
             nand(Rd, Rs);
             break;
-        case INC: // Note: INC, DEC, IN, OUT use the same opcode. You need further decoding based on Rs.
-            if (Rs == 0x00) {
-                inc(Rd);
-            } else if (Rs == 0x01) {
-                dec(Rd);
-            } else if (Rs == 0x02) {
-                out(Rd);
-            } else if (Rs == 0x03) {
-                in(Rd);
+        case INC: // Assuming INC represents the shared opcode for these operations
+            switch (Rs) {
+                case 0x00:
+                    inc(Rd); // Increment the value in register Rd
+                    break;
+                case 0x01:
+                    dec(Rd); // Decrement the value in register Rd
+                    break;
+                case 0x02:
+                    out(Rd); // Output the value in register Rd
+                    break;
+                case 0x03:
+                    in(Rd); // Input a value into register Rd
+                    break;
+                default:
+                    printf("Error: Unrecognized Rs value %02x for opcode %02x\n", Rs, INC);
+                    break;
             }
             break;
         case NOP:
@@ -228,6 +236,4 @@ void skipnz(unsigned char Rd) {
         PC++;
     }
     debug("SKIPNZ", SKIP, Rd, 0, 0);
-}
-
-
+};
