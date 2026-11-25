@@ -20,7 +20,7 @@ This project is a software emulator for the RISCY instruction set, designed as p
    
 2. **Compile the emulator:**
    ```
-   cd RISCY-Emulator
+   cd riscy_emulator
    gcc -o riscy_emulator main.c
    ```
 
@@ -69,7 +69,7 @@ Contributions to the emulator are welcome. Please adhere to the project's coding
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+This project is licensed under the MIT License - see [license.md](license.md) for details.
 
 ## Acknowledgments
 
