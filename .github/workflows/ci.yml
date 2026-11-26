@@ -1,0 +1,19 @@
+name: C11 emulator tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        compiler: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Strict C11 build and regression tests
+        run: make test CC=${{ matrix.compiler }}
+      - name: Address and undefined-behavior sanitizers
+        run: make sanitize CC=${{ matrix.compiler }}
